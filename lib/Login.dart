@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapphw2/WebClient.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -88,6 +89,7 @@ class _LoginPageState extends State {
   LoginData _loginData = new LoginData();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
   @override
+
   Widget build(BuildContext inContext) {
     return MaterialApp(home : Scaffold(
         body : Container(
@@ -116,8 +118,8 @@ class _LoginPageState extends State {
                       TextFormField(
                           obscureText : true,
                           validator : (String inValue) {
-                            if (inValue.length < 10) {
-                              return "Password must be >=10 in length";
+                            if (inValue.length < 3) {
+                              return "Password must be >=4 in length";
                             }
                             return null;
                           },
@@ -134,8 +136,10 @@ class _LoginPageState extends State {
                           onPressed : () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
-                              print("Username: ${_loginData.username}");
-                              print("Password: ${_loginData.PIN}");
+//                              print("Username: ${_loginData.username}");
+//                              print("Password: ${_loginData.PIN}");
+                              int numQuiz =1;
+                              var quizMap =  WebClient().getJsonQuizPOST(numQuiz,_loginData.username,_loginData.PIN);
                             }
                           }
                       )
