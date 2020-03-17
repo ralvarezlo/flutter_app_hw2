@@ -22,6 +22,19 @@ class WebClient {
   }
 
 
+  Future getJsonQuizPOST(int numQuiz, String user, String pin) async {
+    var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/post.php';
+    var body = '{"user": "$user", "pin": "$pin", "quiz": "quiz0$numQuiz" }';
+    var response = await http.get(url);
+    Map jsonD = jsonDecode(response.body);
+    if (jsonD['response'] == true) {
+      return jsonD['quiz'];
+    }
+    else{
+      return null;
+    }
+  }
+
 
 }
 
