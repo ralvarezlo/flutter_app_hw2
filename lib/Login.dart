@@ -15,74 +15,17 @@ class LoginData {
   String PIN = "";
 }
 
-//
-//
-//class _LoginPageState extends State<LoginPage> {
-//  @override
-//  Widget build(BuildContext context) {
-//    return Scaffold(
-//      appBar: AppBar(
-//        // Here we take the value from the MyHomePage object that was created by
-//        // the App.build method, and use it to set our appbar title.
-//        title: Text("login"),
-//
-//      ),
-//      body: Center(
-//        child: ListView(
-//          children: <Widget>[
-//            userInputs(),
-//           // siginButton(),
-//          ],
-//        ),
-//      ),
-//    );
-//  }
-//
-//
-//
-//
-//  Container userInputs(){
-//    return Container(
-//      child: Column (
-//        children: <Widget>[
-//      //    Form(
-//
-//
-//
-//              txtForm("Username", Icons.people),
-//              txtForm("Pin", Icons.lock),
-//              button("signIn")
-//
-//   //       )
-//
-//        ],
-//      ),
-//    );
-//  }
-//
-//
-//
-//
-//  TextFormField txtForm(String title, IconData icon){
-//    return TextFormField(
-//      decoration: InputDecoration(
-//        hintText: title,
-//        icon: Icon(icon)
-//      ),
-//    );
-//  }
-//
-//  Container button(String title){
-//    return Container(
-//      child: RaisedButton(
-//        //onPressed: sigIn(),
-//        child: Text(title),
-//      ),
-//
-//    );
-//
-//  }
-//}
+//method that calls webclient to sign
+signin(String username, String PIN)  async {
+  int numQuiz =1;
+  var response =  await WebClient().getJsonQuizPOST(numQuiz,username,PIN);
+
+  if(response == null){
+    print("declined");
+  }
+  print(response);
+
+}
 
 
 class _LoginPageState extends State {
@@ -138,8 +81,8 @@ class _LoginPageState extends State {
                               _formKey.currentState.save();
 //                              print("Username: ${_loginData.username}");
 //                              print("Password: ${_loginData.PIN}");
-                              int numQuiz =1;
-                              var quizMap =  WebClient().getJsonQuizPOST(numQuiz,_loginData.username,_loginData.PIN);
+                              var response =  signin(_loginData.username, _loginData.PIN);
+
                             }
                           }
                       )

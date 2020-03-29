@@ -26,8 +26,9 @@ class WebClient {
     var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/post.php';
     var body = '{"user": "$user", "pin": "$pin", "quiz": "quiz0$numQuiz" }';
     var response = await http.post(url, body: body);
-    var json = response.body.substring(58);  //remove the body from the json string
-    var jsonD = jsonDecode(json);
+    var jsonD = jsonDecode(response.body);
+    //print(jsonD);
+
 
     if (jsonD["response"] == true) {
      //print(jsonD['quiz']);
