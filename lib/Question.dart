@@ -64,7 +64,9 @@ class MultipleChoiceQuestion extends Question{
   set userAns (String str) {
     _userAns = int.parse(str);
   }
-
+  List<String> get options {
+    return _options;
+  }
   /// Displays the options for a multiple choice question
   @override
   String get prompt {
