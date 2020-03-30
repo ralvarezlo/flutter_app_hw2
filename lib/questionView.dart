@@ -5,6 +5,7 @@ import 'package:flutterapphw2/WebClient.dart';
 import 'package:flutterapphw2/home.dart';
 
 class QuestionView {
+
   Widget MultipleChoiceQuestionWidget(MultipleChoiceQuestion question) {
     int radioGroup = 0;
     var optRadioRows = List<Widget>();
@@ -61,6 +62,21 @@ class QuestionView {
 
 
   }
+
+  List<Widget> QuestionViewList(Quiz quiz) {
+    List<Widget> views = List<Widget>();
+
+    for (Question q in quiz.questions) {
+      if (q is MultipleChoiceQuestion) {
+        views.add(MultipleChoiceQuestionWidget(q));
+        print("added multiple choice question");
+      } else {
+        views.add(FillBlankQuestiontionWidget(q));
+        print("added fill-blank choice question");
+      }
+    }
+    return views;
+  }
 }
 
 
@@ -94,12 +110,8 @@ class Quiz1State extends State<Quiz1>{
                 child: new Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
-
-
                     new Text("Question ${questionNum+1} of ${quiz.test()}"),
-
                     new Text("score"),
-
                     // new Text("Question ${questionNumber+1} of ${quiz.question.length}")
                   ],
                 ),
