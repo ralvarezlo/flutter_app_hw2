@@ -32,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 //  @override
 //  void initState() {
-//    // TODO: implement initState
+//    TODO: implement initState
 //    super.initState();
 //
 ////    widget.auth.test().then((user){
@@ -57,11 +57,15 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext inContext) {
 
-    switch ( authStatus ){
-      case AuthStatus.notSign: return   LoginPage();
-      case AuthStatus.signedIn: return  LoginPage(); //to be change
+    return Scaffold(
+      appBar: AppBar(title: Text("da")),
+    );
 
-    }
+//    switch ( authStatus ){
+//      case AuthStatus.notSign: return   MyHomePage();
+//      case AuthStatus.signedIn: return  MyHomePage(); //to be change
+//
+//    }
 
 
 
