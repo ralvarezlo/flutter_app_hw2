@@ -10,18 +10,19 @@ import 'main.dart';
 import 'WebClient.dart';
 import 'Question.dart';
 import 'QuizBuilder.dart';
+import 'Question.dart';
 
 
 
 class MyHomePage extends StatefulWidget {
 
-   MyHomePage({this.auth});
+   //MyHomePage({this.auth});
 
-   final Auth auth;
+   WebClient Auth = WebClient();
    Quiz quiz;
    QuizBuilder _quizBuilder = QuizBuilder();
    QuestionView _qView = QuestionView();
-   //final WebClient auth;
+
 
    //final VoidCallback onSignedIn;
 
@@ -35,19 +36,35 @@ enum AuthStatus{
 }
 
 
+
+
+
 class _MyHomePageState extends State<MyHomePage> {
 
+
   Widget quesContent = Text("None");
+  List <Widget> questionList;
+
   @override
   void initState() {
     //TODO: implement initState
     super.initState();
 
-    widget.auth.test().then((jsonQuiz) {
+    WebClient x = WebClient();
+
+
+
+    x.test().then((jsonQuiz) {
       setState(() {
-        //print(user);
-        widget.quiz = widget._quizBuilder.fromJson(jsonQuiz);
-        quesContent = widget._qView.MultipleChoiceQuestionWidget(widget.quiz.questions[0]);
+
+
+
+
+         widget.quiz = widget._quizBuilder.fromJson(jsonQuiz); //maps the questions
+
+        var multQuesContent = widget._qView.MultipleChoiceQuestionWidget(widget.quiz.questions[2]);
+         quesContent  = widget._qView.FillBlankQuestiontionWidget(widget.quiz.questions[3]);
+
       });
     }).catchError((e) {
       print("Big Oof :(");
@@ -63,24 +80,49 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("LogedIn"),
         actions: <Widget>[
           FlatButton(
-            onPressed: (){
-              Navigator.push(inContext, new MaterialPageRoute(builder: (inContext) => LoginPage()));
+            onPressed: () {
+              Navigator.push(inContext,
+                  new MaterialPageRoute(builder: (inContext) => LoginPage()));
             },
             child: Text("Log out"),
           ),
         ],
       ),
-      body: quesContent
+
+      //body: quesContent  uncoment this line to make old code work
+
+
+      body: new Container(
+        margin: const EdgeInsets.all(15.0),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            new MaterialButton(
+                color: Colors.amberAccent,
+                height: 40.0,
+                onPressed: quizOne,                              ////comment this block to make old code work and uncoment body
+                child: new Text("quiz 1", style: new TextStyle(
+                    backgroundColor: Colors.green,
+                    fontSize: 18.0
+                ),)
+
+            )
+          ],
+        ),
+      ),
     );
-
-//    switch ( authStatus ){
-//      case AuthStatus.notSign: return   LoginPage();
-//      case AuthStatus.signedIn: return  MyHomePage(auth: Auth(),); //to be change
-//
-//    }
-
 
 
   }
+
+
+  void quizOne() {
+    setState(() {
+      Navigator.push(
+          context, new MaterialPageRoute(builder: (context) => new Quiz1()));
+    });
+  }
+
 
 }

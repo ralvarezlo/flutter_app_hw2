@@ -21,7 +21,7 @@ class LoginData {
 //method that calls webclient to sign
 Future<bool> signin(String username, String PIN) async {
   int numQuiz =1;
-   Auth webClient = Auth();
+   var webClient = WebClient();
   var response =  await webClient.getJsonQuizPOST(numQuiz,username,PIN);
 
   if(response != null){
@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
 
                                 if(onValue != false){
                                   Navigator.push(inContext, new MaterialPageRoute(
-                                      builder: (inContext) => new MyHomePage( auth: Auth()),
+                                      builder: (inContext) => new MyHomePage( ),
                                   ));
                                 }
                               });

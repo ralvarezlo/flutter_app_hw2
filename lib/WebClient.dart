@@ -4,14 +4,14 @@ import 'package:http/http.dart' as http;
 
 // Ricardo Alvarez & Samuel Tinevra.
 /// Gets the quiz questions to be used in this program by connecting to a web client
-abstract class WebClient {
-  Future getJsonQuiz(int numQuiz);
-  Future getJsonQuizPOST(int numQuiz, String user, String pin);
-  Future<dynamic> test();
+//abstract class WebClient {
+//  Future getJsonQuiz(int numQuiz);
+//  Future getJsonQuizPOST(int numQuiz, String user, String pin);
+//  Future<dynamic> test();
+//
+//}
 
-}
-
-class Auth implements WebClient{
+class  WebClient{
   /// Gets the information of a certain quiz with [numQuiz] as a Json respond from a GET call
   ///
   /// Return null if the GET call is unsuccessful
