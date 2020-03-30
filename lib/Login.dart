@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/WebClient.dart';
+import 'package:flutterapphw2/home.dart';
 import 'main.dart';
 
 
 class LoginPage extends StatefulWidget {
-// LoginPage({this.auth});
-//
-//  final WebClient auth;
- // final VoidCallback onSignedIn;
-
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -23,17 +19,17 @@ class LoginData {
 }
 
 //method that calls webclient to sign
-signin(String username, String PIN)  async {
+Future<bool> signin(String username, String PIN) async {
   int numQuiz =1;
    Auth webClient = Auth();
   var response =  await webClient.getJsonQuizPOST(numQuiz,username,PIN);
 
   if(response != null){
-    print("sing");
+    return true;
 
 
   }
-  print(response);
+  return false;
 
 }
 
@@ -58,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext inContext) {
 
     return MaterialApp(home : Scaffold(
-
         body : Container(
             padding : EdgeInsets.all(50.0),
             child : Form(
@@ -103,10 +98,15 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed : () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
+                              var response =  signin(_loginData.username, _loginData.PIN).then((onValue){
 
-//                              print("Username: ${_loginData.username}");
-//                              print("Password: ${_loginData.PIN}");
-                              var response =  signin(_loginData.username, _loginData.PIN);
+                                if(onValue != false){
+                                  Navigator.push(inContext, new MaterialPageRoute(
+                                      builder: (inContext) => new MyHomePage( auth: Auth()),
+                                  ));
+                                }
+                              });
+
 
                             }
                           }
