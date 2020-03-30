@@ -13,7 +13,10 @@ class MyHomePage extends StatefulWidget {
 
    MyHomePage({this.auth});
 
-   final WebClient auth;
+   final Auth auth;
+
+   //final WebClient auth;
+
    //final VoidCallback onSignedIn;
 
   @override
@@ -30,42 +33,36 @@ class _MyHomePageState extends State<MyHomePage> {
 
   AuthStatus authStatus = AuthStatus.notSign;
 
-//  @override
-//  void initState() {
-//    TODO: implement initState
-//    super.initState();
-//
-////    widget.auth.test().then((user){
-////
-////      setState(() {
-////        authStatus = user == null ? AuthStatus.notSign: AuthStatus.signedIn;
-////      });
-////
-////
-////    }).catchError((e){
-////      print("fuck");
-////
-////    });
-//
-//
-////
-//
-//  }
+  @override
+  void initState() {
+    //TODO: implement initState
+    super.initState();
 
+    widget.auth.test().then((user) {
+      setState(() {
+        print(user);
+        authStatus = user == null ? AuthStatus.notSign : AuthStatus.signedIn;
+      });
+    }).catchError((e) {
+
+      print("fuck");
+      print(e.toString());
+    });
+  }
 
 
   @override
   Widget build(BuildContext inContext) {
 
-    return Scaffold(
-      appBar: AppBar(title: Text("da")),
-    );
+//    return Scaffold(
+//      appBar: AppBar(title: Text("da")),
+//    );
 
-//    switch ( authStatus ){
-//      case AuthStatus.notSign: return   MyHomePage();
-//      case AuthStatus.signedIn: return  MyHomePage(); //to be change
-//
-//    }
+    switch ( authStatus ){
+      case AuthStatus.notSign: return   LoginPage();
+      case AuthStatus.signedIn: return  MyHomePage(); //to be change
+
+    }
 
 
 

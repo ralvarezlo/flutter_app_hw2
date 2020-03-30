@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 abstract class WebClient {
   Future getJsonQuiz(int numQuiz);
   Future getJsonQuizPOST(int numQuiz, String user, String pin);
-  Future<String> test();
+  Future<dynamic> test();
 
 }
 
@@ -45,7 +45,7 @@ class Auth implements WebClient{
     }
   }
 
-  Future<String> test() async {
+  Future<dynamic> test() async {
     var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/post.php';
     var body = '{"user": "stinevra", "pin": "1052", "quiz": "quiz01" }';
     var response = await http.post(url, body: body);
@@ -54,7 +54,7 @@ class Auth implements WebClient{
 
 
     if (jsonD["response"] == true) {
-      //print(jsonD['quiz']);
+      print(jsonD['quiz']);
       return jsonD['quiz'];
     }
     else{

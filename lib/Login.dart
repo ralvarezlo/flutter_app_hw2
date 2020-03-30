@@ -25,13 +25,12 @@ class LoginData {
 //method that calls webclient to sign
 signin(String username, String PIN)  async {
   int numQuiz =1;
-   WebClient webClient;
+   Auth webClient = Auth();
   var response =  await webClient.getJsonQuizPOST(numQuiz,username,PIN);
 
   if(response != null){
     print("sing");
 
-       //AuthStatus.notSign;
 
   }
   print(response);
@@ -40,8 +39,6 @@ signin(String username, String PIN)  async {
 
 
 class _LoginPageState extends State<LoginPage> {
-
-
 
   LoginData _loginData = new LoginData();
   GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
@@ -106,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed : () {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
+
 //                              print("Username: ${_loginData.username}");
 //                              print("Password: ${_loginData.PIN}");
                               var response =  signin(_loginData.username, _loginData.PIN);
