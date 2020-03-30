@@ -45,8 +45,10 @@ class QuestionView {
 
     return
       Container(
+        margin: EdgeInsets.all(30),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(question.question),
 

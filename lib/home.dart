@@ -63,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _incrementCounter() {
     setState(() {
-      currQuestion++;
+      currQuestion = (currQuestion + 1) % widget._questionWidgets.length;
     });
   }
 
