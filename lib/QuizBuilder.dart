@@ -30,8 +30,9 @@ class QuizBuilder{
   Future<List<Question>> buildQuestionList (int numQuestions) async {
     List<Question> questions = [];
     int numQuiz =1;
+    WebClient webClient;
     while (numQuestions >= questions.length) {
-      var quizMap = await WebClient().getJsonQuiz(numQuiz);
+      var quizMap = await webClient.getJsonQuiz(numQuiz);
       if(quizMap == null) {
         print('Not enough questions :(,  Just added ${questions.length} question to the test\n');
         return questions;
