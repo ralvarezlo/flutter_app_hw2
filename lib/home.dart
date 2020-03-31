@@ -44,8 +44,10 @@ class _MyHomePageState extends State<MyHomePage> {
 //      print("Big Oof :(");
 //      print(e.toString());
 //    });
-
+    for (Question q in widget.quiz.questions)
+      widget._questionWidgets.add(QuestionView(q));
     super.initState();
+    print("finished initstate");
   }
 
   void _incrementCounter() {
@@ -81,8 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         new MaterialPageRoute(builder: (inContext) => LoginPage()));
                   },
                   child: Text("Log out",
-                  style: TextStyle(
-                      color: Colors.white,fontSize: 20),
+                    style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                 ),
               ],
@@ -101,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.only(left:10.0, right: 10.0),
                         child: FloatingActionButton(
+                          heroTag: "bt1",
                           onPressed: _decreaseCounter,
                           child: Text("Prev"),
                         ),
@@ -108,6 +110,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.only(left:10.0, right: 10.0),
                         child: widget.quiz.isComplete()? FloatingActionButton(
+                          heroTag: "bt2",
                           child: Text ("Submit Quiz",
                             textAlign: TextAlign.center,),
                           onPressed: (){
@@ -118,6 +121,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Padding(
                         padding: const EdgeInsets.only(left:10.0, right: 10.0),
                         child: FloatingActionButton(
+                          heroTag: "bt3",
                           onPressed: _incrementCounter,
                           child: Text("Next"),
                         ),

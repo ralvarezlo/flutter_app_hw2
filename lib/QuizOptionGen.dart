@@ -64,6 +64,7 @@ class OptionGen extends State<QuizOptionGen>{
                 onPressed: () async {
                   if (numQ > 0) {
                     Quiz quiz = await getQuizFromQB();
+                    print("Quiz q0 is: ${quiz.questions[0].question}");
                     Navigator.push(inContext, new MaterialPageRoute(
                         builder: (inContext) => new MyHomePage(quiz)
                     ));
