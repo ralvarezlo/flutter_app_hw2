@@ -14,7 +14,7 @@ class QuizBuilder{
   /// Builds a question, either multiple choice or fill blank based on data from a question in a Map [q];
   Question buildQuestion(Map q) {
     if (q['type']==1) {
-      var mcq = MultipleChoiceQuestion(q['stem'], q['answer'], q['option']);
+      var mcq = MultipleChoiceQuestion(q['stem'], q['answer'], q['option'], q['figure']);
       return mcq;
     }
     else {

@@ -10,10 +10,11 @@ import 'main.dart';
 import 'WebClient.dart';
 import 'Question.dart';
 import 'QuizBuilder.dart';
+import 'QuizOptionGen.dart';
 
 class MyHomePage extends StatefulWidget {
 
-   WebClient Auth = WebClient();
+
    Quiz quiz;
    QuizBuilder _quizBuilder = QuizBuilder();
    List<Widget> _questionWidgets = List<Widget>();
@@ -34,16 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-//    widget._quizBuilder.buildCustomQuiz(3, "ralvarezlo", "5823").then((custQ){
-//      setState(() {
-//        widget.quiz = custQ;
-//        for (Question q in widget.quiz.questions)
-//          widget._questionWidgets.add(QuestionView(q));
-//      });
-//    }).catchError((e) {
-//      print("Big Oof :(");
-//      print(e.toString());
-//    });
     for (Question q in widget.quiz.questions)
       widget._questionWidgets.add(QuestionView(q));
     super.initState();
@@ -114,7 +105,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: Text ("Submit Quiz",
                             textAlign: TextAlign.center,),
                           onPressed: (){
-                            print("Quiz finished with grade ${widget.quiz.grade()}");
+                            _showDialog(widget.quiz.grade());
+
                           },
                         ) : Text("   ")
                       ),
@@ -135,5 +127,31 @@ class _MyHomePageState extends State<MyHomePage> {
     );
 
   }
+
+  void _showDialog(int grade) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext inContext) {
+        // return object of type Dialog
+        return AlertDialog(
+          title: new Text("Quiz finished with grade ${grade} / ${widget._questionWidgets.length}"),
+          content: new Text("Alert Dialog body"),
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+            new FlatButton(
+              child: new Text("Close"),
+              onPressed: () {
+               // Navigator.push(inContext, new MaterialPageRoute(
+                    //builder: (inContext) =>  QuizOptionGen(_M )));
+               // Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
 }

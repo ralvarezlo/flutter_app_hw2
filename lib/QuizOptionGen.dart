@@ -30,14 +30,6 @@ class OptionGen extends State<QuizOptionGen>{
       print("vayase alv hdtpm $e");
     }
 
-//    widget._quizBuilder.buildCustomQuiz(numQ, widget.user, widget.pin).then((custQ){
-//      setState(() {
-//        quiz = custQ;
-//      });
-//    }).catchError((e) {
-//      print("Big Oof :(");
-//      print(e.toString());
-//    });
     return null;
   }
 
@@ -65,6 +57,7 @@ class OptionGen extends State<QuizOptionGen>{
                   if (numQ > 0) {
                     Quiz quiz = await getQuizFromQB();
                     print("Quiz q0 is: ${quiz.questions[0].question}");
+
                     Navigator.push(inContext, new MaterialPageRoute(
                         builder: (inContext) => new MyHomePage(quiz)
                     ));
@@ -78,4 +71,3 @@ class OptionGen extends State<QuizOptionGen>{
     );
   }
 }
-

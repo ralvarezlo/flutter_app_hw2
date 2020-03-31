@@ -4,6 +4,7 @@
 class Question{
   var _validAns;
   var _userAns;
+  String _figure;
   String _sysQues;
 
   set question (String str){
@@ -42,15 +43,24 @@ class Question{
   String get prompt {
     return '';
   }
+
+
+  /// Returns the figure of the question.
+  String get figure{
+    return _figure;
+  }
+
+
 }
 
 /// An extension of the question class to generate a multiple choice question.
 class MultipleChoiceQuestion extends Question{
   List<String> _options = [];
 
-  MultipleChoiceQuestion(String sQues, int vAns, List opt) {
+  MultipleChoiceQuestion(String sQues, int vAns, List opt, String figure) {
     _sysQues = sQues;
     _validAns = vAns;
+    _figure = figure;
     opt.forEach((e) => _options.add(e));
   }
 
@@ -64,9 +74,12 @@ class MultipleChoiceQuestion extends Question{
   set userAns (String str) {
     _userAns = int.parse(str);
   }
+
+
   List<String> get options {
     return _options;
   }
+
   /// Displays the options for a multiple choice question
   @override
   String get prompt {

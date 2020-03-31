@@ -53,14 +53,20 @@ class QuestionViewState extends State<QuestionView> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
+
         children: <Widget>[
           Container(child: Column(
             children: <Widget>[
               Text(question.question),
+
+             // Image.network(question.figure),
+
               Column(children: optRadioRows),
               FlatButton(
                 child: Text("Submit Question"),
                 onPressed: () {
+                  print(question.figure);
+                 // print("+++++++++++++++++++++++");
                   widget._question.userAns = this.selectedRadio.toString();
                   print("User answer is ${widget._question.userAns}");
                 },
@@ -103,20 +109,6 @@ class QuestionViewState extends State<QuestionView> {
       );
   }
 
-//  List<Widget> QuestionViewList(Quiz quiz) {
-//    List<Widget> views = List<Widget>();
-//
-//    for (Question q in quiz.questions) {
-//      if (q is MultipleChoiceQuestion) {
-//        views.add(MultipleChoiceQuestionWidget(q));
-//        print("added multiple choice question");
-//      } else {
-//        views.add(FillBlankQuestiontionWidget(q));
-//        print("added fill-blank choice question");
-//      }
-//    }
-//    return views;
-//  }
 
   @override
   Widget build(BuildContext context) {
