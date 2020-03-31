@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutterapphw2/QuizOptionGen.dart';
 import 'package:flutterapphw2/WebClient.dart';
 import 'package:flutterapphw2/home.dart';
 import 'main.dart';
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                               var response =  signin(_loginData.username, _loginData.PIN).then((onValue){
                                 if(onValue != false){
                                   Navigator.push(inContext, new MaterialPageRoute(
-                                      builder: (inContext) => new MyHomePage(),
+                                      builder: (inContext) => new QuizOptionGen(_loginData.username, _loginData.PIN),
                                   ));
                                 }
                               });

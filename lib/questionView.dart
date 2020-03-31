@@ -31,10 +31,8 @@ class QuestionViewState extends State<QuestionView> {
 
   Widget MultipleChoiceQuestionWidget(MultipleChoiceQuestion question) {
     type = 1 ;
-
     selectedRadio = selectedRadio % question.options.length;
     optRadioRows.clear();
-
 
     for (int i=0; i<question.options.length; i++) {
       optRadioRows.add(Row(children: <Widget>[
@@ -43,7 +41,11 @@ class QuestionViewState extends State<QuestionView> {
             onChanged: (e){
               setSelectedRadio(e);
             }),
-        Text(question.options[i]) //displays options
+        Container(
+          child: Text(question.options[i],
+              overflow: TextOverflow.ellipsis),
+          padding: EdgeInsets.only(right: 15),
+        ) //displays options
       ],));
     }
 
@@ -52,7 +54,6 @@ class QuestionViewState extends State<QuestionView> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-
           Container(child: Column(
             children: <Widget>[
               Text(question.question),
@@ -181,19 +182,19 @@ class Quiz1State extends State<Quiz1>{
 
   }
 
-
-
-
-  void updateQuestion(){
-    updateQuestion(){
-      setState(() {
-        if(questionNum == 1){ //change to size of array
-          Navigator.push(context, new MaterialPageRoute(builder: (context) => new MyHomePage()));
-        }else
-          questionNum++;;
-      });
-    }
-  }
+//
+//
+//
+//  void updateQuestion(){
+//    updateQuestion(){
+//      setState(() {
+//        if(questionNum == 1){ //change to size of array
+//          Navigator.push(context, new MaterialPageRoute(builder: (context) => new MyHomePage()));
+//        }else
+//          questionNum++;;
+//      });
+//    }
+//  }
 
 
 }

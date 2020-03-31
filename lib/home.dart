@@ -18,6 +18,7 @@ class MyHomePage extends StatefulWidget {
    QuizBuilder _quizBuilder = QuizBuilder();
    List<Widget> _questionWidgets = List<Widget>();
 
+   MyHomePage(this.quiz);
 
   @override
   State<StatefulWidget> createState() =>  new _MyHomePageState();
@@ -26,25 +27,23 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-  
+
   Widget quesContent = Text("None");
   List <Widget> questionList;
   int currQuestion = 0;
 
   @override
   void initState() {
-    WebClient x = WebClient();
-
-    widget._quizBuilder.buildCustomQuiz(80).then((custQ){
-      setState(() {
-        widget.quiz = custQ;
-        for (Question q in widget.quiz.questions)
-          widget._questionWidgets.add(QuestionView(q));
-      });
-    }).catchError((e) {
-      print("Big Oof :(");
-      print(e.toString());
-    });
+//    widget._quizBuilder.buildCustomQuiz(3, "ralvarezlo", "5823").then((custQ){
+//      setState(() {
+//        widget.quiz = custQ;
+//        for (Question q in widget.quiz.questions)
+//          widget._questionWidgets.add(QuestionView(q));
+//      });
+//    }).catchError((e) {
+//      print("Big Oof :(");
+//      print(e.toString());
+//    });
 
     super.initState();
   }
@@ -95,7 +94,6 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 Text("Question ${currQuestion+1}/${widget._questionWidgets.length}"),
                 widget._questionWidgets[currQuestion],
-                // widget._questionWidgets.
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -106,6 +104,16 @@ class _MyHomePageState extends State<MyHomePage> {
                           onPressed: _decreaseCounter,
                           child: Text("Prev"),
                         ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                        child: widget.quiz.isComplete()? FloatingActionButton(
+                          child: Text ("Submit Quiz",
+                            textAlign: TextAlign.center,),
+                          onPressed: (){
+                            print("Quiz finished with grade ${widget.quiz.grade()}");
+                          },
+                        ) : Text("   ")
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left:10.0, right: 10.0),
@@ -120,11 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
         ),
-
     );
-
-
-
 
   }
 

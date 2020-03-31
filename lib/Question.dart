@@ -52,7 +52,6 @@ class MultipleChoiceQuestion extends Question{
     _sysQues = sQues;
     _validAns = vAns;
     opt.forEach((e) => _options.add(e));
-    _userAns = 0;
   }
 
   set options (List<String> str) {_options = str;}
@@ -129,6 +128,15 @@ class Quiz {
     var currGrade = 0;
     _questions.forEach((e) => currGrade += e.isCorrect? 1:0);
     return currGrade;
+  }
+
+  /// True if the quiz is complete, false otherwise
+  bool isComplete() {
+    bool retBool = true;
+    _questions.forEach((e){
+      if (e.userAns == null) retBool = false;
+    });
+    return retBool;
   }
 }
 
