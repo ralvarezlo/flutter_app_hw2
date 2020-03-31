@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/QuizOptionGen.dart';
 import 'package:flutterapphw2/WebClient.dart';
-import 'package:flutterapphw2/home.dart';
-import 'main.dart';
 
 
 class LoginPage extends StatefulWidget {

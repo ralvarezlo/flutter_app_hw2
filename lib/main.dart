@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'Login.dart';
-import 'home.dart';
-import 'WebClient.dart';
+
 void main() => runApp(MyApp());
 
 

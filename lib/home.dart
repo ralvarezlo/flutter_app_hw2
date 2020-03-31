@@ -4,14 +4,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/Login.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutterapphw2/QuizBuilder.dart';
 import 'package:flutterapphw2/ReviewScreen.dart';
 import 'package:flutterapphw2/questionView.dart';
-import 'main.dart';
-import 'WebClient.dart';
 import 'Question.dart';
-import 'QuizBuilder.dart';
-import 'QuizOptionGen.dart';
 
 class MyHomePage extends StatefulWidget {
 
