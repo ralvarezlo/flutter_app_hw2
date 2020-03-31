@@ -151,5 +151,14 @@ class Quiz {
     });
     return retBool;
   }
+
+  /// Returns the questions that are wrong
+  List<Question> get wrongQuestions {
+    List<Question> wrongQ = List<Question>();
+    _questions.forEach((q) {
+      if(!q.isCorrect) wrongQ.add(q);
+    });
+    return wrongQ;
+  }
 }
 

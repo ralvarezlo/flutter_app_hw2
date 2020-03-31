@@ -15,7 +15,6 @@ class QuizOptionGen extends StatefulWidget{
   State<StatefulWidget> createState() {
     return new OptionGen();
   }
-
 }
 
 class OptionGen extends State<QuizOptionGen>{
@@ -27,7 +26,7 @@ class OptionGen extends State<QuizOptionGen>{
           numQ, widget.user, widget.pin);
       return quiz;
     } catch (e) {
-      print("vayase alv hdtpm $e");
+      print("Big Oof :( = $e");
     }
 
     return null;
@@ -71,3 +70,4 @@ class OptionGen extends State<QuizOptionGen>{
     );
   }
 }
+

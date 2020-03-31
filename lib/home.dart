@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutterapphw2/Login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutterapphw2/QuizBuilder.dart';
+import 'package:flutterapphw2/ReviewScreen.dart';
 import 'package:flutterapphw2/questionView.dart';
 import 'main.dart';
 import 'WebClient.dart';
@@ -16,7 +17,6 @@ class MyHomePage extends StatefulWidget {
 
 
    Quiz quiz;
-   QuizBuilder _quizBuilder = QuizBuilder();
    List<Widget> _questionWidgets = List<Widget>();
 
    MyHomePage(this.quiz);
@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+
     for (Question q in widget.quiz.questions)
       widget._questionWidgets.add(QuestionView(q));
     super.initState();
@@ -147,6 +148,13 @@ class _MyHomePageState extends State<MyHomePage> {
                // Navigator.of(context).pop();
               },
             ),
+            FlatButton(
+              child: Text("Review"),
+              onPressed: () {
+                Navigator.push(inContext, new MaterialPageRoute(
+                    builder: (inContext) => new ReviewScreen(widget.quiz)));
+              },
+            )
           ],
         );
       },

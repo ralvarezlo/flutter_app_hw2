@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/Question.dart';
-import 'package:flutterapphw2/WebClient.dart';
-import 'package:flutterapphw2/home.dart';
 
 class QuestionView extends StatefulWidget {
   Question _question;
@@ -62,7 +60,7 @@ class QuestionViewState extends State<QuestionView> {
              // Image.network(question.figure),
 
               Column(children: optRadioRows),
-              FlatButton(
+              RaisedButton(
                 child: Text("Submit Question"),
                 onPressed: () {
                   print(question.figure);
@@ -96,7 +94,7 @@ class QuestionViewState extends State<QuestionView> {
                 labelText: "Answer",
               ),
             ),
-            FlatButton(
+            RaisedButton(
               child: Text("Submit"),
               onPressed: () {
                 widget._question.userAns = _textControl.text;
