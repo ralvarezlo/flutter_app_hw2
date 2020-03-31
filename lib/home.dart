@@ -17,24 +17,18 @@ import 'Question.dart';
 
 class MyHomePage extends StatefulWidget {
 
-   //MyHomePage({this.auth});
-
    WebClient Auth = WebClient();
    Quiz quiz;
    QuizBuilder _quizBuilder = QuizBuilder();
    QuestionView _qView = QuestionView();
    List<Widget> _questionWidgets;
 
-   //final VoidCallback onSignedIn;
 
   @override
   State<StatefulWidget> createState() =>  new _MyHomePageState();
 }
 
-enum AuthStatus{
-  notSign,
-  signedIn
-}
+
 
 class _MyHomePageState extends State<MyHomePage> {
 
@@ -67,33 +61,48 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  Widget x (){
+
+  }
+
   @override
   Widget build(BuildContext inContext) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("LogedIn"),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.push(inContext,
-                  new MaterialPageRoute(builder: (inContext) => LoginPage()));
-            },
-            child: Text("Log out"),
-          ),
-        ],
-      ),
 
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          widget._questionWidgets[currQuestion],
-          FloatingActionButton(
-            onPressed: _incrementCounter,
-            child: Text("Submit"),
-          )
-        ],
-      )
+    return WillPopScope(
+      onWillPop: () => Future.value((false)),
+
+
+       child: Scaffold(
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+              title: Text("LogedIn"),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.push(inContext,
+                        new MaterialPageRoute(builder: (inContext) => LoginPage()));
+                  },
+                  child: Text("Log out",
+                  style: TextStyle(
+                      color: Colors.white,fontSize: 20),
+                  ),
+                ),
+              ],
+            ),
+
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                widget._questionWidgets[currQuestion],
+                // widget._questionWidgets.
+
+                FloatingActionButton(
+                  onPressed: _incrementCounter,
+                  child: Text("Submit"),
+                )
+              ],
+            )
 
 //      body: new Container(
 //        margin: const EdgeInsets.all(15.0),
@@ -114,7 +123,11 @@ class _MyHomePageState extends State<MyHomePage> {
 //          ],
 //        ),
 //      ),
+        ),
+
     );
+
+
 
 
   }

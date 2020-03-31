@@ -98,8 +98,8 @@ class Quiz1 extends StatefulWidget{
 class Quiz1State extends State<Quiz1>{
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
-      onWillPop: ()async => false,
+    return  WillPopScope(
+      onWillPop: () => Future.value(false),
       child: Scaffold(
 
         body: new Container(
