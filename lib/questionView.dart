@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/Question.dart';
-import 'package:flutterapphw2/QuizBuilder.dart';
 import 'package:flutterapphw2/WebClient.dart';
 import 'package:flutterapphw2/home.dart';
 
 class QuestionView extends StatefulWidget {
   Question _question;
   QuestionView(this._question);
+
+  void addQuestionAnswer(var x) {
+    _question.userAns = x;
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -18,6 +21,7 @@ class QuestionViewState extends State<QuestionView> {
   int selectedRadio = 0;
   var optRadioRows = List<Widget>();
   int type =0;
+  final _textControl = TextEditingController();
 
   void setSelectedRadio(int selRad) {
     setState(() {
@@ -30,6 +34,8 @@ class QuestionViewState extends State<QuestionView> {
 
     selectedRadio = selectedRadio % question.options.length;
     optRadioRows.clear();
+
+
     for (int i=0; i<question.options.length; i++) {
       optRadioRows.add(Row(children: <Widget>[
         Radio(value: i,
@@ -47,11 +53,20 @@ class QuestionViewState extends State<QuestionView> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
 
-          Container(child: Text(
-              question.question ), margin: EdgeInsets.all(30)
+          Container(child: Column(
+            children: <Widget>[
+              Text(question.question),
+              Column(children: optRadioRows),
+              FlatButton(
+                child: Text("Submit Question"),
+                onPressed: () {
+                  widget._question.userAns = this.selectedRadio.toString();
+                  print("User answer is ${widget._question.userAns}");
+                },
+              )
+            ],
+          ), margin: EdgeInsets.all(30)
           ),
-          Text(""),
-          Column(children: optRadioRows)
         ],
       ),
     );
@@ -59,6 +74,7 @@ class QuestionViewState extends State<QuestionView> {
 
   Widget FillBlankQuestiontionWidget(FillBlankQuestion question) {
     type = 2;
+    print("Current answer is ${widget._question.userAns}");
     return
       Container(
         margin: EdgeInsets.all(30),
@@ -67,11 +83,18 @@ class QuestionViewState extends State<QuestionView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(question.question),
-
             TextField(
+              controller: _textControl,
               decoration: InputDecoration(
-                labelText: 'Answer',
+                labelText: "Answer",
               ),
+            ),
+            FlatButton(
+              child: Text("Submit"),
+              onPressed: () {
+                widget._question.userAns = _textControl.text;
+                print("User answer submitted: ${widget._question.userAns}");
+              },
             )
           ],
 

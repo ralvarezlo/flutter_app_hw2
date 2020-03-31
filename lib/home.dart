@@ -38,8 +38,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    //TODO: implement initState
-
 
     WebClient x = WebClient();
     x.test().then((jsonQuiz) {
@@ -58,6 +56,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       currQuestion = (currQuestion + 1) % widget._questionWidgets.length;
+    });
+  }
+
+  void _decreaseCounter() {
+    setState(() {
+      currQuestion = (currQuestion - 1) % widget._questionWidgets.length;
     });
   }
 
@@ -97,9 +101,26 @@ class _MyHomePageState extends State<MyHomePage> {
                 widget._questionWidgets[currQuestion],
                 // widget._questionWidgets.
 
-                FloatingActionButton(
-                  onPressed: _incrementCounter,
-                  child: Text("Submit"),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                        child: FloatingActionButton(
+                          onPressed: _decreaseCounter,
+                          child: Text("Prev"),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left:10.0, right: 10.0),
+                        child: FloatingActionButton(
+                          onPressed: _incrementCounter,
+                          child: Text("Next"),
+                        ),
+                      )
+                    ],
+                  ),
                 )
               ],
             )

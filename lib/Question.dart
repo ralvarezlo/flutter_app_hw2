@@ -52,6 +52,7 @@ class MultipleChoiceQuestion extends Question{
     _sysQues = sQues;
     _validAns = vAns;
     opt.forEach((e) => _options.add(e));
+    _userAns = 0;
   }
 
   set options (List<String> str) {_options = str;}
