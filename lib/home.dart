@@ -1,6 +1,5 @@
 
 import 'dart:async';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutterapphw2/Login.dart';
@@ -11,9 +10,6 @@ import 'main.dart';
 import 'WebClient.dart';
 import 'Question.dart';
 import 'QuizBuilder.dart';
-import 'Question.dart';
-
-
 
 class MyHomePage extends StatefulWidget {
 
@@ -30,26 +26,26 @@ class MyHomePage extends StatefulWidget {
 
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
+  
   Widget quesContent = Text("None");
   List <Widget> questionList;
   int currQuestion = 0;
 
   @override
   void initState() {
-
     WebClient x = WebClient();
-    x.test().then((jsonQuiz) {
+
+    widget._quizBuilder.buildCustomQuiz(80).then((custQ){
       setState(() {
-         widget.quiz = widget._quizBuilder.fromJson(jsonQuiz); //maps the questions
-         for (Question q in widget.quiz.questions)
-         widget._questionWidgets.add(QuestionView(q));
+        widget.quiz = custQ;
+        for (Question q in widget.quiz.questions)
+          widget._questionWidgets.add(QuestionView(q));
       });
     }).catchError((e) {
       print("Big Oof :(");
       print(e.toString());
     });
+
     super.initState();
   }
 
@@ -123,27 +119,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 )
               ],
             ),
-
-
-//      body: new Container(
-//        margin: const EdgeInsets.all(15.0),
-//        child: new Column(
-//          crossAxisAlignment: CrossAxisAlignment.stretch,
-//          mainAxisAlignment: MainAxisAlignment.center,
-//          children: <Widget>[
-//            new MaterialButton(
-//                color: Colors.amberAccent,
-//                height: 40.0,
-//                onPressed: quizOne,                              ////comment this block to make old code work and uncoment body
-//                child: new Text("quiz 1", style: new TextStyle(
-//                    backgroundColor: Colors.green,
-//                    fontSize: 18.0
-//                ),)
-//
-//            )
-//          ],
-//        ),
-//      ),
         ),
 
     );

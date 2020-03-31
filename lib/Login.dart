@@ -10,9 +10,6 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
-
-
-
 class LoginData {
   String username = "";
   String PIN = "";
@@ -26,11 +23,8 @@ Future<bool> signin(String username, String PIN) async {
 
   if(response != null){
     return true;
-
-
   }
   return false;
-
 }
 
 
@@ -99,15 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                             if (_formKey.currentState.validate()) {
                               _formKey.currentState.save();
                               var response =  signin(_loginData.username, _loginData.PIN).then((onValue){
-
                                 if(onValue != false){
                                   Navigator.push(inContext, new MaterialPageRoute(
                                       builder: (inContext) => new MyHomePage(),
                                   ));
                                 }
                               });
-
-
                             }
                           }
                       )
