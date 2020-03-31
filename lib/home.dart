@@ -20,8 +20,7 @@ class MyHomePage extends StatefulWidget {
    WebClient Auth = WebClient();
    Quiz quiz;
    QuizBuilder _quizBuilder = QuizBuilder();
-   QuestionView _qView = QuestionView();
-   List<Widget> _questionWidgets;
+   List<Widget> _questionWidgets = List<Widget>();
 
 
   @override
@@ -46,7 +45,8 @@ class _MyHomePageState extends State<MyHomePage> {
     x.test().then((jsonQuiz) {
       setState(() {
          widget.quiz = widget._quizBuilder.fromJson(jsonQuiz); //maps the questions
-         widget._questionWidgets = widget._qView.QuestionViewList(widget.quiz);
+         for (Question q in widget.quiz.questions)
+         widget._questionWidgets.add(QuestionView(q));
       });
     }).catchError((e) {
       print("Big Oof :(");

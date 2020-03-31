@@ -4,23 +4,39 @@ import 'package:flutterapphw2/QuizBuilder.dart';
 import 'package:flutterapphw2/WebClient.dart';
 import 'package:flutterapphw2/home.dart';
 
-class QuestionView {
+class QuestionView extends StatefulWidget {
+  Question _question;
+  QuestionView(this._question);
+
+  @override
+  State<StatefulWidget> createState() {
+    return new QuestionViewState();
+  }
+}
+
+class QuestionViewState extends State<QuestionView> {
+  int selectedRadio = 0;
+  var optRadioRows = List<Widget>();
+  int type =0;
+
+  void setSelectedRadio(int selRad) {
+    setState(() {
+      selectedRadio = selRad;
+    });
+  }
 
   Widget MultipleChoiceQuestionWidget(MultipleChoiceQuestion question) {
-    int radioGroup = 0;
-    var optRadioRows = List<Widget>();
+    type = 1 ;
 
+    selectedRadio = selectedRadio % question.options.length;
+    optRadioRows.clear();
     for (int i=0; i<question.options.length; i++) {
       optRadioRows.add(Row(children: <Widget>[
-        Radio(
-          value: i,
-          groupValue: radioGroup,
-          onChanged: (int e) {
-            print("test");
-            radioGroup = e;
-          },
-        ),
-
+        Radio(value: i,
+            groupValue: selectedRadio,
+            onChanged: (e){
+              setSelectedRadio(e);
+            }),
         Text(question.options[i]) //displays options
       ],));
     }
@@ -42,7 +58,7 @@ class QuestionView {
   }
 
   Widget FillBlankQuestiontionWidget(FillBlankQuestion question) {
-
+    type = 2;
     return
       Container(
         margin: EdgeInsets.all(30),
@@ -61,23 +77,30 @@ class QuestionView {
 
         ),
       );
-
-
   }
 
-  List<Widget> QuestionViewList(Quiz quiz) {
-    List<Widget> views = List<Widget>();
+//  List<Widget> QuestionViewList(Quiz quiz) {
+//    List<Widget> views = List<Widget>();
+//
+//    for (Question q in quiz.questions) {
+//      if (q is MultipleChoiceQuestion) {
+//        views.add(MultipleChoiceQuestionWidget(q));
+//        print("added multiple choice question");
+//      } else {
+//        views.add(FillBlankQuestiontionWidget(q));
+//        print("added fill-blank choice question");
+//      }
+//    }
+//    return views;
+//  }
 
-    for (Question q in quiz.questions) {
-      if (q is MultipleChoiceQuestion) {
-        views.add(MultipleChoiceQuestionWidget(q));
-        print("added multiple choice question");
-      } else {
-        views.add(FillBlankQuestiontionWidget(q));
-        print("added fill-blank choice question");
-      }
+  @override
+  Widget build(BuildContext context) {
+    if (widget._question is MultipleChoiceQuestion) {
+      return MultipleChoiceQuestionWidget(widget._question);
+    } else {
+      return FillBlankQuestiontionWidget(widget._question);
     }
-    return views;
   }
 }
 
