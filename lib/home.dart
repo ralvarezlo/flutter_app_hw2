@@ -136,13 +136,4 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-
-  void quizOne() {
-    setState(() {
-      Navigator.push(
-          context, new MaterialPageRoute(builder: (context) => new Quiz1()));
-    });
-  }
-
-
 }

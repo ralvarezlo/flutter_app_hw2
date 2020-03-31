@@ -54,31 +54,6 @@ class  WebClient{
     return null;
   }
 
-  Future<dynamic> test() async {
-    var url = 'http://www.cs.utep.edu/cheon/cs4381/homework/quiz/post.php';
-    var body = '{"user": "stinevra", "pin": "1052", "quiz": "quiz01" }';
-    for (int i=0; i<30; i++) {
-      try {
-        var response = await http.post(url, body: body);
-        print("response is $response");
-        var jsonD = jsonDecode(response.body);
-        print(jsonD);
-
-        if (jsonD["response"] == true) {
-          return jsonD['quiz'];
-        }
-        else{
-          return null;
-        }
-      }
-      catch (e) {
-        print(e.toString());
-      }
-    }
-
-    print("error getting info from server");
-    return null;
-  }
 }
 
 
