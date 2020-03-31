@@ -75,7 +75,6 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () => Future.value((false)),
 
-
        child: Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
@@ -98,9 +97,9 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Text("Question ${currQuestion+1}/${widget._questionWidgets.length}"),
                 widget._questionWidgets[currQuestion],
                 // widget._questionWidgets.
-
                 Center(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 )
               ],
-            )
+            ),
+
 
 //      body: new Container(
 //        margin: const EdgeInsets.all(15.0),
